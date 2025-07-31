@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Урок "Управление html содержимым из js"</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <h1>студенты</h1>
+    <ul id="list">
+      <!-- <li><span>Глеб</span><button class="remove">удалить</button></li>
+      <li><span>Иван</span><button class="remove">удалить</button></li>
+      <li><span>Люси</span><button class="remove">удалить</button></li> -->
+    </ul>
+
+    <div>
+      <h3 id="title"></h3>
+      Имя:
+      <input type="text" id="field" />
+      <br /><br />
+      Пол:
+      <input type="text" id="fieldGender" />
+      <br /><br />
+      Возраст:
+      <input type="text" id="fieldAge" />
+      <br /><br />
+      <button type="button" id="add">Добавить</button>
+    </div>
+
+    <script>
+      const button = document.getElementById("add");
+      const list = document.getElementById("list");
+      const input = document.getElementById("field");
+      const inputGender = document.getElementById("fieldGender");
+      const inputAge = document.getElementById("fieldAge");
+      const title = document.getElementById("title");
+
+    const students = [
+        { name: "Глеб", isMale: true, age: 20 },
+        { name: "Иван", isMale: true, age: 22 },
+        { name: "Люси", isMale: false, age: 19 }
+    ];
+    
+    const initRemoveEl = ()=>{
+        const deleteElements = document.querySelectorAll('.remove');
+
+        for (const deleteElement of deleteElements) {
+            deleteElement.addEventListener('click', () => {
+            const index = deleteElement.dataset.removebtn;
+            students.splice(index, 1)
+            renderStudents(students);
+        })
+    }
+}
+    
+
+    function renderStudents(students) {
+        const list = document.getElementById('list');
+
+        list.innerHTML = students.map((student, index)=>`
+            <li><span class='nameElement' data-age='${student.age}'>${student.name}</span> - ${student.isMale? 'Мужчина': 'Женщина'}, Возраст ${student.age} <button data-removebtn='${index}' class="remove">удалить</button>
+            </li>
+            `).join('');
+
+            const nameElements = document.querySelectorAll('.nameElement');
+           
+            nameElements.forEach(nameElement=>{
+                nameElement.addEventListener('click', () => {
+                        const age = nameElement.dataset.age;
+                alert(`Возраст: ${age}`);
+                })
+            })
+            initRemoveEl();
+        };
+
+        renderStudents(students);
+
+
+    const clickOnTitle = ()=>{
+        title.addEventListener('click', () => {
+            console.log("клик на заголовок");
+        })
+    }
+
+
+    function renderTitle(title) {
+        title.innerHTML = `<h3 id="title">Форма добавления</h3>`;
+        clickOnTitle();
+        };
+
+        renderTitle(title);
+
+
+
+
+
+      button.addEventListener("click", () => {
+        input.classList.remove("error");
+        inputGender.classList.remove("error");
+        inputAge.classList.remove("error");
+
+        if (input.value === "" || inputGender.value === "" || inputAge.value === "") {
+          input.classList.add("error");
+          inputGender.classList.add("error");
+          inputAge.classList.add("error");
+          return;
+        }
+
+        const li = document.createElement("li"); 
+        // не понимаю, что делать с дата-атрибутом для дин эл, чт на них это все тоже добивилось с возрастом
+        li.innerHTML = `<span class='nameElement' data-age='${inputAge.value}'>${input.value}</span> - ${inputGender.value}, Возраст ${inputAge.value}<button class="remove">удалить</button>`;
+        
+        list.appendChild(li);
+
+        // li.addEventListener('click', () => {
+        //     const age = li.querySelector('.nameElement').dataset.age;
+        //     alert(`Возраст: ${age}`);
+        //     });
+
+        li.querySelector('.nameElement').addEventListener('click', (event) => {
+            const age = event.target.dataset.age;
+            alert(`Возраст: ${age}`);
+            event.stopPropagation(); // Останавливаем всплытие события
+            });
+           
+
+        const newStudents = {name: input.value, isMale: inputGender.value, age: inputAge.value};
+        students.push(newStudents);
+
+
+        input.value = "";
+        inputGender.value = "";
+        inputAge.value = "";
+
+        renderStudents(students);
+      });
+
+
+    //   list.addEventListener("click", (event) => {
+    //     if (event.target.classList.contains('remove')){
+    //         const li = event.target.closest('li');
+    //         if (li) {
+    //             li.remove();
+    //         }
+    //     }
+    //   });
+
+
+
+
+    </script>
+  </body>
+</html>
+
+
+    <!-- <script src="arrays_and_objects__1.js"></script> -->
+</body>
+</html>
