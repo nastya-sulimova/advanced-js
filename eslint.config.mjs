@@ -8,7 +8,7 @@ export default defineConfig([
   {
     files: ['**/*.{js,mjs,cjs}'],
     rules: {
-      'no-unused-vars': 'warn'
+      'no-unused-vars': 'error'
     },
     languageOptions: {
       globals: globals.browser

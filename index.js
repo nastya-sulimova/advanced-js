@@ -1,9 +1,7 @@
-import { renderStudents } from './modules/renderStudents.js'
-import { initAddStudent } from './modules/initAddStudent.js'
+// import { fetchAndRender } from './modules/fetchAndRender.js'
 
-renderStudents()
+import { renderLogin } from "./modules/renderLogin.js";
 
-export const button = document.getElementById('add')
-export const input = document.getElementById('field')
+// fetchAndRender()
 
-initAddStudent()
+renderLogin()

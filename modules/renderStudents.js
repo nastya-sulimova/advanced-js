@@ -2,14 +2,27 @@ import { students } from './students.js'
 import { initDeleteListeners, initShowAge } from './initListeners.js'
 
 export const renderStudents = () => {
-    const list = document.getElementById('list')
+    const app = document.getElementById('app')
     const studentsHtml = students
-        .map((student, index) => {
-            return `<li data-age="${student.age}"><span>${student.name}</span><button class="delete" data-index="${index}">удалить</button></li>`
+        .map((student) => {
+            return `<li data-age="${student.age}"><span>${student.text}</span><button class="delete" data-id="${student.id}">удалить</button></li>`
         })
         .join('')
 
-    list.innerHTML = studentsHtml
+    const appHtml = `
+        <h1>Список задач</h1>
+        <ul id="list">${studentsHtml}</ul>
+
+        <div>
+            <h3>Форма добавления</h3>
+            Имя:
+            <input type="text" id="field" />
+            <br /><br />
+            <button type="button" id="add">Добавить</button>
+        </div>
+    `
+
+    app.innerHTML = appHtml
 
     initDeleteListeners()
     initShowAge()
