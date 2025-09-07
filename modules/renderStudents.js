@@ -26,4 +26,6 @@ export const renderStudents = () => {
 
     initDeleteListeners()
     initShowAge()
+
+    console.log(renderStudents);
 }

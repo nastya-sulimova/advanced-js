@@ -1,4 +1,5 @@
-import { login } from "./api.js"
+import { login, updateToken } from "./api.js"
+import { fetchAndRender } from "./fetchAndRender.js"
 
 export const renderLogin = () => {
     const app = document.getElementById('app')
@@ -21,29 +22,28 @@ export const renderLogin = () => {
     const passwordElement = document.getElementById('password-input')
 
     // button.addEventListener('click', () => {
-    //     // Выводим отладочную информацию перед вызовом функции login
-    //     console.log('Перед вызовом login:');
-    //     console.log('Логин:', loginElement.value);
-    //     console.log('Пароль:', passwordElement.value);
-    
     //     login({
     //         login: loginElement.value,
     //         password: passwordElement.value,
     //     })
-    //     .then((responseData) => {
-    //         console.log('Ответ от сервера:', responseData);
-    //     })
-    //     .catch((error) => {
-    //         console.error('Произошла ошибка:', error);
-    //     });
-    // });
+    // }).then((responseData)=>{
+    //     console.log(responseData);
+    // })
 
-    button.addEventListener('click', () => {
-        login({
-            login: loginElement.value,
-            password: passwordElement.value,
-        })
-    }).then((responseData)=>{
+button.addEventListener('click', () => {
+    login({
+        login: loginElement.value,
+        password: passwordElement.value,
+    })
+    .then((responseData) => {
+        updateToken(responseData.user.token)
+        fetchAndRender()
         console.log(responseData);
     })
+    .catch((error) => {
+        console.error('Произошла ошибка:', error);
+        // Дополнительная обработка ошибок
+    })
+}) 
+
 }

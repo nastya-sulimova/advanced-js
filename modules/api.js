@@ -10,7 +10,7 @@ const authToken = 'https://wedev-api.sky.pro/api/user'
 
 export function getTodos() {
     return fetch(host, {
-        method: GET,
+        method: 'GET',
         headers: {
             Authorization: `Bearer ${token}`
         }
@@ -22,7 +22,7 @@ export function getTodos() {
 
 export function deleteTodo({id}) {
     return fetch(`${host}/${id}`, {
-        method: DELETE,
+        method: 'DELETE',
         headers: {
            Authorization: `Bearer ${token}`
         }
@@ -53,6 +53,10 @@ export function login({login, password}) {
     .then((response)=>{
         return response.json()
     })
+    // .catch((error) => {
+    //     console.error('Произошла ошибка:', error);
+    //     // Дополнительная обработка ошибок
+    // })
 }
 
 export function registration({login, name, password}) {

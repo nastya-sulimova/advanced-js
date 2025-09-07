@@ -1,7 +1,8 @@
 import { fetchAndRender } from './fetchAndRender.js'
 import { formatInput } from './formatInput.js'
-import { input } from '../index.js'
-import { button } from '../index.js'
+// import { input } from '../index.js'
+// import { button } from '../index.js'
+import { deleteTodo, postTodo } from './api.js'
 
 export const initDeleteListeners = () => {
     const deleteElements = document.querySelectorAll('.delete')
@@ -14,9 +15,8 @@ export const initDeleteListeners = () => {
             deleteElement.disabled = true
             deleteElement.textContent = 'Задача удаляется...'
 
-            fetch(`https://wedev-api.sky.pro/api/todos/${id}`, {
-                method: 'DELETE'
-            }).then(()=>{
+            deleteTodo({id})
+            .then(()=>{
                 // return Promise.reject('опять что- не так')
                 return fetchAndRender()
             }).then(() => {
@@ -41,8 +41,9 @@ export const initShowAge = () => {
     }
 }
 
-
 export const initAddStudent = () => {
+    const button = document.getElementById('add')
+
     button.addEventListener('click', () => {
         input.classList.remove('error')
 
@@ -57,15 +58,12 @@ export const initAddStudent = () => {
         button.disabled = true
         button.textContent = 'Создание задачи...'
 
-        fetch('https://wedev-api.sky.pro/api/todos', {
-            method: 'POST',
-            body: JSON.stringify(newStudents),
-        })
+        postTodo(newStudents)
         .then((response)=>{
              if (response.status === 400){
                 throw new Error('Задачу "ничего" создать нельзя, займитесь чем-нибудь полезным');
             }
-            return response.json()
+            // return response.json()
         })
         .then(()=>{
             return fetchAndRender()
