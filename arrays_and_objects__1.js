@@ -112,10 +112,7 @@
 // // }
 // // displayProductDetails(productInfo);
 
-
-
 // // // "Название: Кресло VILORA, Цена: 21000, Статус: в наличии, Скидка: скидка 10%"
-
 
 // // --------------------------------------------------------------------Практика-----------------------------------
 // // // Задача 1. Фильтрация и сортировка товаров
@@ -132,7 +129,6 @@
 // // // });
 
 // // // console.log(availableProducts);
-
 
 // // const priceByGrowing = products.sort((a,b)=>a.price-b.price);
 // // console.log(priceByGrowing);
@@ -152,13 +148,12 @@
 // //     },0);
 // //     console.log(availableProducts);
 
-
 // // // Задача 3. Найти товар с самой высокой ценой
 // // const mostExpensiveProduct = products.reduce((expensive, product) => {
 // //     return product.price > expensive.price ? product : expensive;
 // // });
 
-// // console.log("Самый дорогой товар:", mostExpensiveProduct.title, "—", 
+// // console.log("Самый дорогой товар:", mostExpensiveProduct.title, "—",
 // // mostExpensiveProduct.price);
 
 // // Задача 4. Подсчитать количество товаров в наличии и не в наличии
@@ -191,10 +186,10 @@
 
 // const Newproducts =products.map(object=>{
 //     return {
-//             id: object.id, 
+//             id: object.id,
 //             productName: object.title,
-//             price: object.price, 
-//             stock: object.stock, 
+//             price: object.price,
+//             stock: object.stock,
 //             details: object.details};
 //     });
 
@@ -204,30 +199,27 @@
 // // })
 // // );
 
-
 // const priceInUSD =Newproducts.map(object=>{
 //     return {
-//             id: object.id, 
+//             id: object.id,
 //             productName: object.productName,
-//             price: object.price/100, 
-//             stock: object.stock, 
+//             price: object.price/100,
+//             stock: object.stock,
 //             details: object.details};
 //     });
 
 // // const priceInUSD =Newproducts.map(object=>({
-// //             price: object.price/100, 
+// //             price: object.price/100,
 // //             ...object
 // //     })
 // // );
 
 // const newCategory =priceInUSD.map(object=>{
 //     return {
-//             ...object, 
+//             ...object,
 //             details:{
 //                 productCategory: object.details.category
 //             }};
 //     });
 
 // console.log(newCategory);
-
-
